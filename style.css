@@ -1,0 +1,36 @@
+body {
+    background-color: #011627;
+    color: #fdfffc;
+}
+#game-board {
+    display: grid;
+    height: 600px;
+    width: 600px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 10px;
+    gap: 10px;
+    border-radius: 10px;
+    background-color: #fdfffc;
+}
+
+.square {
+    border-radius: 10px;
+    background-color: #2ec4b6;
+}
+
+#a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 128px;
+    color: #ff9f1c;
+}
+
+#b {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 128px;
+    color: #e71d36;
+}
