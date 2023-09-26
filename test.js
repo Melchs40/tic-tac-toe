@@ -1,42 +1,62 @@
 const gameBoard = (() => {
-    const gameBoardArr = [];
+    const gameBoardArr = ["X", "O", "O", "O", "X", "X", "O", "X", "X"];
     const square = document.getElementsByClassName("square");
-    const playerSymbolArr = ["X", "O"];
+    const playerSymbol1 = "X";
+    const playerSymbol2 = "O";
     
-    for (let i = 0; i < square.length; i++) {
-        square[i].addEventListener("click", function changeBoard() {
-            square[i].textContent = playerSymbolArr[1];
-            gameBoardArr[i] = playerSymbolArr[1];
-    })}; 
+    // for (let i = 0; i < square.length; i++) {
+    //     square[i].addEventListener("click", function changeBoard() {
+    //         square[i].textContent = gameBoardArr[i];
+    // })}; 
 })();
 
-const Player = (name) => {
+const Player = (name, playerSymbol) => {
     const sayHello = () => {
         alert("Hello, " + name + "!")
     }
     return {
         name,
+        playerSymbol,
         sayHello: sayHello,
     }
 };
 
+const player1 = Player("John", "T");
+
+const player2 = Player("Steve", "K");
+
+
+const changeBoard = (() => {
+    let squares = document.querySelectorAll(".square");
+    let squaresArr = Array.from(squares);
+    squaresArr.forEach(item => {
+        item.addEventListener("click", function changeBoard() {
+            item.textContent = playerSymbol;
+        })
+    })
+})();
+
+
+
 document.getElementById("submit-button").addEventListener("click", function createPlayer (){
     
     let playerName = document.getElementById("player-name").value;
-    console.log(playerName);
 
-    const Player = (name) => {
-        const playerId = 1;
-        playerId++;
-        const sayHello = () => {
-            alert("Hello, " + name + "!")
-        }
-        return {
-            name,
-            playerId,
-            sayHello: sayHello,
-        }
-    };
+    let playerSymbol = document.getElementById("player-symbol").value;
+
+    console.log(playerName);
+    console.log(playerSymbol);
+
+    let newPlayer = Player(playerName, playerSymbol);
+
+    newPlayer.id = 1;
+    console.log(newPlayer);
+
+    return {
+        playerName,
+        playerSymbol,
+        newPlayer
+    }
 
 
 });
