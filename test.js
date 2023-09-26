@@ -14,28 +14,26 @@ const Player = (name, playerSymbol) => {
     const sayHello = () => {
         alert("Hello, " + name + "!")
     }
+    id = 1;
+    const changeBoard = () => {
+        let squares = document.querySelectorAll(".square");
+        let squaresArr = Array.from(squares);
+        squaresArr.forEach(item => {
+            item.addEventListener("click", function changeBoard() {
+                item.textContent = playerSymbol;
+                item.disabled = "true";
+            })
+        })
+    };
+
     return {
         name,
+        id,
         playerSymbol,
         sayHello: sayHello,
+        changeBoard: changeBoard
     }
 };
-
-const player1 = Player("John", "T");
-
-const player2 = Player("Steve", "K");
-
-
-const changeBoard = (() => {
-    let squares = document.querySelectorAll(".square");
-    let squaresArr = Array.from(squares);
-    squaresArr.forEach(item => {
-        item.addEventListener("click", function changeBoard() {
-            item.textContent = playerSymbol;
-        })
-    })
-})();
-
 
 
 document.getElementById("submit-button").addEventListener("click", function createPlayer (){
@@ -49,8 +47,9 @@ document.getElementById("submit-button").addEventListener("click", function crea
 
     let newPlayer = Player(playerName, playerSymbol);
 
-    newPlayer.id = 1;
     console.log(newPlayer);
+
+    Player.id++;
 
     return {
         playerName,

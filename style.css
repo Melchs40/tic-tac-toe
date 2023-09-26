@@ -19,6 +19,10 @@ body {
     background-color: #2ec4b6;
 }
 
+.square:hover {
+    border: #ff9f1c;
+}
+
 #a {
     display: flex;
     justify-content: center;
