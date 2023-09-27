@@ -8,6 +8,9 @@ const gameBoard = (() => {
     //     square[i].addEventListener("click", function changeBoard() {
     //         square[i].textContent = gameBoardArr[i];
     // })}; 
+    return {
+        gameBoardArr
+    }
 })();
 
 const players = [];
@@ -26,6 +29,7 @@ const Player = (name, playerSymbol) => {
             item.addEventListener("click", function changeBoard() {
                 item.textContent = activePlayer[1];
                 item.classList.add(activePlayer[1]);
+                gameBoard.gameBoardArr[item.id] = activePlayer[1];
                 item.disabled = "true";
                 switchPlayerTurn();
             })
