@@ -23,7 +23,7 @@ body {
     border: #ff9f1c;
 }
 
-#a {
+.X {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,7 +31,7 @@ body {
     color: #ff9f1c;
 }
 
-#b {
+.O {
     display: flex;
     justify-content: center;
     align-items: center;

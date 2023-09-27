@@ -1,5 +1,5 @@
 const gameBoard = (() => {
-    const gameBoardArr = ["X", "O", "O", "O", "X", "X", "O", "X", "X"];
+    const gameBoardArr = ["", "", "", "", "", "", "", "", ""];
     const square = document.getElementsByClassName("square");
     const playerSymbol1 = "X";
     const playerSymbol2 = "O";
@@ -25,6 +25,7 @@ const Player = (name, playerSymbol) => {
         squaresArr.forEach(item => {
             item.addEventListener("click", function changeBoard() {
                 item.textContent = activePlayer[1];
+                item.classList.add(activePlayer[1]);
                 item.disabled = "true";
                 switchPlayerTurn();
             })
