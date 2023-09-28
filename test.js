@@ -3,24 +3,26 @@ const gameBoard = (() => {
     const square = document.getElementsByClassName("square");
     const playerSymbol1 = "X";
     const playerSymbol2 = "O";
-    
+    const players = [];
+
     // for (let i = 0; i < square.length; i++) {
     //     square[i].addEventListener("click", function changeBoard() {
     //         square[i].textContent = gameBoardArr[i];
     // })}; 
     return {
-        gameBoardArr
+        gameBoardArr,
+        players
     }
 })();
 
-const players = [];
+
 
 const Player = (name, playerSymbol) => {
 
     const sayHello = () => {
         alert("Hello, " + name + "!")
     }
-    players.push([name, playerSymbol]);
+    gameBoard.players.push([name, playerSymbol]);
 
     const changeBoard = () => {
         let squares = document.querySelectorAll(".square");
@@ -32,6 +34,7 @@ const Player = (name, playerSymbol) => {
                 gameBoard.gameBoardArr[item.id] = activePlayer[1];
                 item.disabled = "true";
                 switchPlayerTurn();
+                document.getElementById("player-announce").textContent = `It is ${activePlayer[1]}'s turn`;
             })
         })
     };
@@ -39,7 +42,6 @@ const Player = (name, playerSymbol) => {
     return {
         name,
         playerSymbol,
-        players,
         sayHello: sayHello,
         changeBoard: changeBoard
     }
@@ -51,10 +53,10 @@ document.getElementById("submit-button").addEventListener("click", function crea
     let playerName = document.getElementById("player-name").value.toLowerCase();
     let playerSymbol = document.getElementById("player-symbol").value;
     let newPlayer = Player(playerName, playerSymbol);
-
     console.log(playerName);
     console.log(playerSymbol);
     console.log(newPlayer);
+
 
     return {
         playerName,
@@ -63,39 +65,41 @@ document.getElementById("submit-button").addEventListener("click", function crea
     }
 });
 
-let sam = Player("sam", "X");
-let john = Player("john", "O");
+let playerOne = Player("Player 1", "X");
+let playerTwo = Player("Player 2", "O");
 
-let activePlayer = players[0];
+playerOne.changeBoard();
+
+let activePlayer = gameBoard.players[0];
 const switchPlayerTurn = () => {
-    activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    activePlayer = activePlayer === gameBoard.players[0] ? gameBoard.players[1] : gameBoard.players[0];
   };
 
-sam.changeBoard();
+
 
 playGame = () => {
     
-    let activePlayer = players[0];
+    let activePlayer = gameBoard.players[0];
     const switchPlayerTurn = () => {
-        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+        activePlayer = activePlayer === gameBoard.players[0] ? gameBoard.players[1] : gameBoard.players[0];
       };
 
-    const changeBoard = () => {
-        let squares = document.querySelectorAll(".square");
-        let squaresArr = Array.from(squares);
-        squaresArr.forEach(item => {
-            item.addEventListener("click", function changeBoard() {
-                item.textContent = activePlayer.symbol;
-                item.disabled = "true";
-                switchPlayerTurn();
-            })
-        })
-    };
+    // const changeBoard = () => {
+    //     let squares = document.querySelectorAll(".square");
+    //     let squaresArr = Array.from(squares);
+    //     squaresArr.forEach(item => {
+    //         item.addEventListener("click", function changeBoard() {
+    //             item.textContent = activePlayer.symbol;
+    //             item.disabled = "true";
+    //             switchPlayerTurn();
+    //         })
+    //     })
+    // };
 
     return {
         activePlayer,
         switchPlayerTurn: switchPlayerTurn,
-        changeBoard: changeBoard
+        // changeBoard: changeBoard
     }
 };
 
