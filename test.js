@@ -3,6 +3,12 @@ const gameBoard = (() => {
     const gameBoardArr = ["", "", "", "", "", "", "", "", ""];
     const players = [];
 
+    let squares = document.querySelectorAll(".square");
+    let squaresArr = Array.from(squares);
+    squaresArr.forEach(item => {
+        item.disabled = "true";
+    });
+
     return {
         gameBoardArr,
         players
@@ -10,23 +16,17 @@ const gameBoard = (() => {
 })();
 
 // creates players and adds them to players array in gameBoard
-const Player = (name, playerSymbol) => {
+function Player (name, playerSymbol) {
 
     const sayHello = () => {
         alert("Hello, " + name + "!")
     }
     gameBoard.players.push([name, playerSymbol]);
 
-    const startGame = () => {
-        playGame().changeBoard();
-        playGame().checkWinner();
-    }
-
     return {
         name,
         playerSymbol,
         sayHello: sayHello,
-        startGame: startGame
     }
 };
 
@@ -36,10 +36,8 @@ document.getElementById("submit-button").addEventListener("click", function crea
     let playerName = document.getElementById("player-name").value.toLowerCase();
     let playerSymbol = document.getElementById("player-symbol").value;
     let newPlayer = Player(playerName, playerSymbol);
-    console.log(playerName);
-    console.log(playerSymbol);
-    console.log(newPlayer);
-
+    document.getElementById("player-name").value = "";
+    document.getElementById("player-symbol").value = "";
     return {
         playerName,
         playerSymbol,
@@ -123,11 +121,17 @@ playGame = () => {
     }
 };
 
-let playerOne = Player("Player 1", "X");
-let playerTwo = Player("Player 2", "T");
 
-playerOne.startGame();
+document.getElementById("start-button").addEventListener("click", function() {
+    let squares = document.querySelectorAll(".square");
+    let squaresArr = Array.from(squares);
+    squaresArr.forEach(item => {
+        item.disabled = false;
+    });
+    playGame().changeBoard();
+    playGame().checkWinner();
+});
 
-
-
+// let playerOne = Player("Player 1", "X");
+// let playerTwo = Player("Player 2", "O");
 

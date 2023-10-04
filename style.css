@@ -19,8 +19,8 @@ body {
     background-color: #2ec4b6;
 }
 
-.square:hover {
-    border: #ff9f1c;
+.square:disabled {
+    border: 3px solid #ff9f1c;
 }
 
 .X {
