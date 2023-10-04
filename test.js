@@ -51,6 +51,7 @@ document.getElementById("submit-button").addEventListener("click", function crea
 playGame = () => {
     
     let activePlayer = gameBoard.players[0];
+    let gameText = document.getElementById("player-announce");
     const switchPlayerTurn = () => {
         activePlayer = activePlayer === gameBoard.players[0] ? gameBoard.players[1] : gameBoard.players[0];
       };
@@ -64,9 +65,15 @@ playGame = () => {
                 item.classList.add(activePlayer[1]);
                 gameBoard.gameBoardArr[item.id] = activePlayer[1];
                 item.disabled = "true";
-                document.getElementById("player-announce").textContent = `It is ${activePlayer[1]}'s turn`;
                 checkWinner();
                 switchPlayerTurn();
+                if (gameText.textContent.includes("won")) {
+
+                } else if (gameText.textContent.includes("draw")) {
+                
+                } else {
+                    gameText.textContent = `It is ${activePlayer[1]}'s turn`;
+                }
             })
         })
     };
@@ -94,14 +101,14 @@ playGame = () => {
  
         for (let i = 0; i < winners.length; i++) {
             if ((winners[i][0] === gameBoard.players[0][1] || winners[i][0] === gameBoard.players[1][1]) && winners[i][0] === winners[i][1] && winners[i][0] === winners[i][2]) {
-                document.getElementById("player-announce").textContent = `${activePlayer[0]} has won the game!`;
-                document.getElementById("player-announce").classList.add("winner");
+                gameText.textContent = `${activePlayer[0]} has won the game!`;
+                gameText.classList.add("winner");
                 squaresArr.forEach(item => {
                     item.disabled = "true";
                 })
                 break;
             } else if (squaresArr.every(checkDisabled)) {
-                document.getElementById("player-announce").textContent = "The game is a draw";
+                gameText.textContent = "The game is a draw";
                 break;
             }
         };
@@ -117,7 +124,7 @@ playGame = () => {
 };
 
 let playerOne = Player("Player 1", "X");
-let playerTwo = Player("Player 2", "O");
+let playerTwo = Player("Player 2", "T");
 
 playerOne.startGame();
 
