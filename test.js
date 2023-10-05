@@ -35,14 +35,16 @@ document.getElementById("submit-button").addEventListener("click", function crea
     
     let playerName = document.getElementById("player-name").value;
     let playerSymbol = document.getElementById("player-symbol").value;
-    if (gameBoard.players.length < 1) {
 
+    // alerts player two if symbol has already been used
+    // need to work on this
+    if (gameBoard.players.length < 1) {
     }
     else if (playerSymbol == gameBoard.players[0][1]) {
         alert("You must pick a different symbol")
     } else {
+    };
 
-    }
     let newPlayer = Player(playerName, playerSymbol);
     for (let i = gameBoard.players.length; i < gameBoard.players.length + 1; i++) {
         if (true) {
@@ -87,7 +89,7 @@ playGame = () => {
             item.addEventListener("click", function changeBoard() {
                 item.textContent = activePlayer[1];
                 item.classList.add("player-" + (gameBoard.players.indexOf(activePlayer)));
-                gameBoard.gameBoardArr[item.id] = activePlayer[1];
+                gameBoard.gameBoardArr[item.id] = (gameBoard.players.indexOf(activePlayer));
                 item.disabled = "true";
                 checkWinner();
                 switchPlayerTurn();
@@ -96,7 +98,7 @@ playGame = () => {
                 } else if (gameText.textContent.includes("draw")) {
                 
                 } else {
-                    gameText.textContent = `It is ${activePlayer[1]}'s turn`;
+                    gameText.textContent = `It is ${activePlayer[0]}'s turn`;
                 }
             })
         })
@@ -126,7 +128,7 @@ playGame = () => {
         let counter = 0;
 
         for (let i = 0; i < winners.length; i++) {
-            if ((winners[i][0] === gameBoard.players[0][1] || winners[i][0] === gameBoard.players[1][1]) && winners[i][0] === winners[i][1] && winners[i][0] === winners[i][2]) {
+            if ((winners[i][0] === 0|| winners[i][0] === 1) && winners[i][0] === winners[i][1] && winners[i][0] === winners[i][2]) {
                 gameText.textContent = `${activePlayer[0]} has won the game!`;
                 gameText.classList.add("winner");
                 squaresArr.forEach(item => {
@@ -140,6 +142,10 @@ playGame = () => {
                 break;
             }
         };
+
+        return {
+            winners
+        }
 
     }
 
@@ -158,6 +164,8 @@ document.getElementById("start-button").addEventListener("click", function() {
     squaresArr.forEach(item => {
         item.disabled = false;
     });
+    let gameText = document.getElementById("player-announce");
+    gameText.textContent = "It is Player 1's turn";
     playGame().changeBoard();
     playGame().checkWinner();
 });
