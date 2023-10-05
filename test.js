@@ -6,7 +6,7 @@ const gameBoard = (() => {
     let squares = document.querySelectorAll(".square");
     let squaresArr = Array.from(squares);
     squaresArr.forEach(item => {
-        item.disabled = "true";
+        item.disabled = true;
     });
 
     return {
@@ -33,9 +33,35 @@ function Player (name, playerSymbol) {
 // adds button to create players for game
 document.getElementById("submit-button").addEventListener("click", function createPlayer (){
     
-    let playerName = document.getElementById("player-name").value.toLowerCase();
+    let playerName = document.getElementById("player-name").value;
     let playerSymbol = document.getElementById("player-symbol").value;
+    if (gameBoard.players.length < 1) {
+
+    }
+    else if (playerSymbol == gameBoard.players[0][1]) {
+        alert("You must pick a different symbol")
+    } else {
+
+    }
     let newPlayer = Player(playerName, playerSymbol);
+    for (let i = gameBoard.players.length; i < gameBoard.players.length + 1; i++) {
+        if (true) {
+            let addPlayerName = document.getElementById(("player" + [i] + "-name"));
+            addPlayerName.textContent = playerName;
+            let addPlayerSymbol = document.getElementById(("player" + [i] + "-symbol"));
+            addPlayerSymbol.textContent = playerSymbol;
+            if (gameBoard.players.length > 1) {
+                let submit = document.getElementById("submit-button");
+                submit.disabled = true;
+                let playerNameSubmit = document.getElementById("player-name");
+                playerNameSubmit.disabled = true;
+                let playerSymbolSubmit = document.getElementById("player-symbol");
+                playerSymbolSubmit.disabled = true;
+            } else {
+
+            }
+        }
+    }
     document.getElementById("player-name").value = "";
     document.getElementById("player-symbol").value = "";
     return {
@@ -60,7 +86,7 @@ playGame = () => {
         squaresArr.forEach(item => {
             item.addEventListener("click", function changeBoard() {
                 item.textContent = activePlayer[1];
-                item.classList.add(activePlayer[1]);
+                item.classList.add("player-" + (gameBoard.players.indexOf(activePlayer)));
                 gameBoard.gameBoardArr[item.id] = activePlayer[1];
                 item.disabled = "true";
                 checkWinner();
@@ -96,16 +122,20 @@ playGame = () => {
             [square[0], square[4], square[8]],
             [square[2], square[4], square[6]]
         ];
- 
+        
+        let counter = 0;
+
         for (let i = 0; i < winners.length; i++) {
             if ((winners[i][0] === gameBoard.players[0][1] || winners[i][0] === gameBoard.players[1][1]) && winners[i][0] === winners[i][1] && winners[i][0] === winners[i][2]) {
                 gameText.textContent = `${activePlayer[0]} has won the game!`;
                 gameText.classList.add("winner");
                 squaresArr.forEach(item => {
-                    item.disabled = "true";
+                    item.disabled = true;
                 })
                 break;
-            } else if (squaresArr.every(checkDisabled)) {
+            } else if (counter < winners.length) {
+                counter++;
+            } else if (squaresArr.every(checkDisabled) && (counter >= winners.length)) {
                 gameText.textContent = "The game is a draw";
                 break;
             }
