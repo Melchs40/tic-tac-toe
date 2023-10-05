@@ -2,9 +2,9 @@
 const gameBoard = (() => {
     const gameBoardArr = ["", "", "", "", "", "", "", "", ""];
     const players = [];
-
     let squares = document.querySelectorAll(".square");
     let squaresArr = Array.from(squares);
+
     squaresArr.forEach(item => {
         item.disabled = true;
     });
@@ -21,6 +21,7 @@ function Player (name, playerSymbol) {
     const sayHello = () => {
         alert("Hello, " + name + "!")
     }
+
     gameBoard.players.push([name, playerSymbol]);
 
     return {
@@ -35,17 +36,8 @@ document.getElementById("submit-button").addEventListener("click", function crea
     
     let playerName = document.getElementById("player-name").value;
     let playerSymbol = document.getElementById("player-symbol").value;
-
-    // alerts player two if symbol has already been used
-    // need to work on this
-    if (gameBoard.players.length < 1) {
-    }
-    else if (playerSymbol == gameBoard.players[0][1]) {
-        alert("You must pick a different symbol")
-    } else {
-    };
-
     let newPlayer = Player(playerName, playerSymbol);
+
     for (let i = gameBoard.players.length; i < gameBoard.players.length + 1; i++) {
         if (true) {
             let addPlayerName = document.getElementById(("player" + [i] + "-name"));
@@ -64,8 +56,10 @@ document.getElementById("submit-button").addEventListener("click", function crea
             }
         }
     }
+
     document.getElementById("player-name").value = "";
     document.getElementById("player-symbol").value = "";
+
     return {
         playerName,
         playerSymbol,
@@ -78,6 +72,7 @@ playGame = () => {
     
     let activePlayer = gameBoard.players[0];
     let gameText = document.getElementById("player-announce");
+
     const switchPlayerTurn = () => {
         activePlayer = activePlayer === gameBoard.players[0] ? gameBoard.players[1] : gameBoard.players[0];
       };
@@ -87,12 +82,14 @@ playGame = () => {
         let squaresArr = Array.from(squares);
         squaresArr.forEach(item => {
             item.addEventListener("click", function changeBoard() {
+
                 item.textContent = activePlayer[1];
                 item.classList.add("player-" + (gameBoard.players.indexOf(activePlayer)));
                 gameBoard.gameBoardArr[item.id] = (gameBoard.players.indexOf(activePlayer));
                 item.disabled = "true";
                 checkWinner();
                 switchPlayerTurn();
+
                 if (gameText.textContent.includes("won")) {
 
                 } else if (gameText.textContent.includes("draw")) {
@@ -135,9 +132,10 @@ playGame = () => {
                     item.disabled = true;
                 })
                 break;
-            } else if (counter < winners.length) {
+            } else if (counter < (winners.length - 1)) {
                 counter++;
-            } else if (squaresArr.every(checkDisabled) && (counter >= winners.length)) {
+                console.log(counter);
+            } else if (squaresArr.every(checkDisabled) && ((counter + 1) >= winners.length)) {
                 gameText.textContent = "The game is a draw";
                 break;
             }
@@ -161,15 +159,13 @@ playGame = () => {
 document.getElementById("start-button").addEventListener("click", function() {
     let squares = document.querySelectorAll(".square");
     let squaresArr = Array.from(squares);
+
     squaresArr.forEach(item => {
         item.disabled = false;
     });
+
     let gameText = document.getElementById("player-announce");
     gameText.textContent = "It is Player 1's turn";
     playGame().changeBoard();
     playGame().checkWinner();
 });
-
-// let playerOne = Player("Player 1", "X");
-// let playerTwo = Player("Player 2", "O");
-
