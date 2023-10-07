@@ -111,7 +111,7 @@ playGame = () => {
                 } else if (gameText.textContent.includes("draw")) {
                 
                 } else {
-                    gameText.textContent = `It is ${activePlayer[0]}'s turn`;
+                    gameText.textContent = `It's ${activePlayer[0]}'s turn`;
                 }
             }, {once:true});
         })
@@ -142,7 +142,7 @@ playGame = () => {
         
         for (let i = 0; i < winners.length; i++) {
             if ((winners[i][0] === 0|| winners[i][0] === 1) && winners[i][0] === winners[i][1] && winners[i][0] === winners[i][2]) {
-                gameText.textContent = `${activePlayer[0]} has won the game!`;
+                gameText.textContent = `${activePlayer[0]} won the game!`;
                 if (activePlayer[0] == gameBoard.players[0][0]) {
                     gameText.classList.add("winner-1");
                 } else {
@@ -185,7 +185,7 @@ document.getElementById("start-button").addEventListener("click", function() {
         item.disabled = false;
     });
     let gameText = document.getElementById("player-announce");
-    gameText.textContent = `It is ${playGame().activePlayer[0]}'s turn`;
+    gameText.textContent = `It's ${playGame().activePlayer[0]}'s turn`;
     playGame().changeBoard();
     playGame().checkWinner();
     this.hidden = true;
