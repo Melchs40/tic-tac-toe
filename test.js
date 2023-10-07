@@ -10,10 +10,13 @@ const gameBoard = (() => {
     });
 
     document.getElementById("reset-button").disabled = true;
+    let startButton = document.getElementById("start-button");
+    startButton.disabled = true;
 
     return {
         gameBoardArr,
-        players
+        players,
+        startButton
     }
 })();
 
@@ -35,7 +38,6 @@ function Player (name, playerSymbol) {
 
 // adds button to create players for game
 document.getElementById("submit-button").addEventListener("click", function createPlayer (){
-
     if (document.getElementById("player-name").value === "") {
         alert("Please enter a name")
     } else if (document.getElementById("player-symbol").value === "") {
@@ -67,12 +69,9 @@ document.getElementById("submit-button").addEventListener("click", function crea
 
         document.getElementById("player-name").value = "";
         document.getElementById("player-symbol").value = "";
-    }
-
-    return {
-        playerName,
-        playerSymbol,
-        newPlayer
+        if (gameBoard.players.length == 2) {
+            gameBoard.startButton.disabled = false;
+        }
     }
 });
 
@@ -155,7 +154,6 @@ playGame = () => {
                 break;
             } else if (counter < (winners.length - 1)) {
                 counter++;
-                console.log(counter);
             } else if (squaresArr.every(checkDisabled) && ((counter + 1) >= winners.length)) {
                 gameText.textContent = "The game is a draw";
                 break;
@@ -245,4 +243,4 @@ document.getElementById("reset-button").addEventListener("click", function () {
 
     }
 
-})
+});
