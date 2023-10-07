@@ -7,31 +7,57 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Tic Tac Toe</h1>
-    <div id="player-stuff1" class="player-stuff">
-        <div id="player1-name"></div>
-        <div id="player1-symbol"></div>
+    <h1 id="title">Tic Tac Toe</h1>
+    <div id="player-announce">Add your name and your desired symbol. Press start game to begin and reset game to play again!</div>
+    <div id="page-container">
+        <div id="player-info">
+            <div id="player-stuff1" class="player-stuff">
+                <div id="player1-name-container">
+                    <div>Player 1:</div>
+                    <div id="player1-name"></div>
+                </div>
+                <div id="player1-symbol-container">
+                    <div>Symbol:</div>
+                    <div id="player1-symbol"></div>
+                </div>
+            </div>
+            <div id="player-stuff2" class="player-stuff">
+                <div id="player2-name-container">
+                    <div>Player 2:</div>
+                    <div id="player2-name"></div>
+                </div>
+                <div id="player2-symbol-container">
+                    <div>Symbol:</div>
+                    <div id="player2-symbol"></div>
+                </div>
+            </div>
+        </div>
+        <div id="board-container">
+            <div id="game-board">
+                <button type="button" id="0" class="square"></button>
+                <button type="button" id="1" class="square"></button>
+                <button type="button" id="2" class="square"></button>
+                <button type="button" id="3" class="square"></button>
+                <button type="button" id="4" class="square"></button>
+                <button type="button" id="5" class="square"></button>
+                <button type="button" id="6" class="square"></button>
+                <button type="button" id="7" class="square"></button>
+                <button type="button" id="8" class="square"></button>
+            </div>
+        </div>
+        <div id="player-controls">
+            <div id="player-enter-form">
+                <input type="text" class="player-forms" id="player-name" name="player-name" minlength="1" placeholder="Enter Player Name...">
+                <input type="text" class="player-forms" id="player-symbol" name="player-symbol" minlength="1" maxlength="1" placeholder="Enter Player Symbol">
+            </div>
+            <button type="button" id="submit-button" class="submit-button player-buttons">Create Player</button>
+            <div id="game-buttons">
+                <button type="button" class="player-buttons" id="start-button">Start Game</button>
+                <button type="button" class="player-buttons" id="reset-button">Reset Game</button>
+            </div>
+        </div>
     </div>
-    <div id="player-stuff2" class="player-stuff">
-        <div id="player2-name"></div>
-        <div id="player2-symbol"></div>
-    </div>
-    <div id="player-announce"></div>
-    <input type="text" id="player-name" name="player-name" placeholder="Enter Player Name...">
-    <input type="text" id="player-symbol" name="player-symbol" placeholder="Enter Player Symbol">
-    <button type="button" id="submit-button" class="submit-button">Create Player</button>
-    <button type="button" id="start-button">Start Game</button>
-    <div id="game-board">
-        <button type="button" id="0" class="square"></button>
-        <button type="button" id="1" class="square"></button>
-        <button type="button" id="2" class="square"></button>
-        <button type="button" id="3" class="square"></button>
-        <button type="button" id="4" class="square"></button>
-        <button type="button" id="5" class="square"></button>
-        <button type="button" id="6" class="square"></button>
-        <button type="button" id="7" class="square"></button>
-        <button type="button" id="8" class="square"></button>
-    </div>
+    <footer id="footer">Copyright © Melchs40's Computer Whiz Coding 2023</footer>
 
     <script src="test.js"></script>
 </body>

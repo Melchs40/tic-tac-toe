@@ -9,6 +9,8 @@ const gameBoard = (() => {
         item.disabled = true;
     });
 
+    document.getElementById("reset-button").disabled = true;
+
     return {
         gameBoardArr,
         players
@@ -33,32 +35,39 @@ function Player (name, playerSymbol) {
 
 // adds button to create players for game
 document.getElementById("submit-button").addEventListener("click", function createPlayer (){
+
+    if (document.getElementById("player-name").value === "") {
+        alert("Please enter a name")
+    } else if (document.getElementById("player-symbol").value === "") {
+        alert("Please enter a symbol")
+    } else {
     
-    let playerName = document.getElementById("player-name").value;
-    let playerSymbol = document.getElementById("player-symbol").value;
-    let newPlayer = Player(playerName, playerSymbol);
+        let playerName = document.getElementById("player-name").value;
+        let playerSymbol = document.getElementById("player-symbol").value;
+        let newPlayer = Player(playerName, playerSymbol);
 
-    for (let i = gameBoard.players.length; i < gameBoard.players.length + 1; i++) {
-        if (true) {
-            let addPlayerName = document.getElementById(("player" + [i] + "-name"));
-            addPlayerName.textContent = playerName;
-            let addPlayerSymbol = document.getElementById(("player" + [i] + "-symbol"));
-            addPlayerSymbol.textContent = playerSymbol;
-            if (gameBoard.players.length > 1) {
-                let submit = document.getElementById("submit-button");
-                submit.disabled = true;
-                let playerNameSubmit = document.getElementById("player-name");
-                playerNameSubmit.disabled = true;
-                let playerSymbolSubmit = document.getElementById("player-symbol");
-                playerSymbolSubmit.disabled = true;
-            } else {
+        for (let i = gameBoard.players.length; i < gameBoard.players.length + 1; i++) {
+            if (true) {
+                let addPlayerName = document.getElementById(("player" + [i] + "-name"));
+                addPlayerName.textContent = playerName;
+                let addPlayerSymbol = document.getElementById(("player" + [i] + "-symbol"));
+                addPlayerSymbol.textContent = playerSymbol;
+                if (gameBoard.players.length > 1) {
+                    let submit = document.getElementById("submit-button");
+                    submit.disabled = true;
+                    let playerNameSubmit = document.getElementById("player-name");
+                    playerNameSubmit.disabled = true;
+                    let playerSymbolSubmit = document.getElementById("player-symbol");
+                    playerSymbolSubmit.disabled = true;
+                } else {
 
+                }
             }
         }
-    }
 
-    document.getElementById("player-name").value = "";
-    document.getElementById("player-symbol").value = "";
+        document.getElementById("player-name").value = "";
+        document.getElementById("player-symbol").value = "";
+    }
 
     return {
         playerName,
@@ -83,12 +92,20 @@ playGame = () => {
         squaresArr.forEach(item => {
             item.addEventListener("click", function changeBoard() {
 
+                item.classList.remove("player-1");
+                item.classList.remove("player-0");
                 item.textContent = activePlayer[1];
-                item.classList.add("player-" + (gameBoard.players.indexOf(activePlayer)));
                 gameBoard.gameBoardArr[item.id] = (gameBoard.players.indexOf(activePlayer));
+                item.classList.add("player-" + (gameBoard.gameBoardArr[item.id]));
                 item.disabled = "true";
                 checkWinner();
                 switchPlayerTurn();
+
+                if (document.getElementById("reset-button").disabled = true) {
+                    document.getElementById("reset-button").disabled = false;
+                } else {
+        
+                };
 
                 if (gameText.textContent.includes("won")) {
 
@@ -97,7 +114,7 @@ playGame = () => {
                 } else {
                     gameText.textContent = `It is ${activePlayer[0]}'s turn`;
                 }
-            })
+            }, {once:true});
         })
     };
 
@@ -123,11 +140,15 @@ playGame = () => {
         ];
         
         let counter = 0;
-
+        
         for (let i = 0; i < winners.length; i++) {
             if ((winners[i][0] === 0|| winners[i][0] === 1) && winners[i][0] === winners[i][1] && winners[i][0] === winners[i][2]) {
                 gameText.textContent = `${activePlayer[0]} has won the game!`;
-                gameText.classList.add("winner");
+                if (activePlayer[0] == gameBoard.players[0][0]) {
+                    gameText.classList.add("winner-1");
+                } else {
+                    gameText.classList.add("winner-2");
+                }
                 squaresArr.forEach(item => {
                     item.disabled = true;
                 })
@@ -146,7 +167,6 @@ playGame = () => {
         }
 
     }
-
     return {
         activePlayer,
         switchPlayerTurn: switchPlayerTurn,
@@ -160,12 +180,69 @@ document.getElementById("start-button").addEventListener("click", function() {
     let squares = document.querySelectorAll(".square");
     let squaresArr = Array.from(squares);
 
+    let resetButton = document.getElementById("reset-button");
+    resetButton.disabled = false;
+
     squaresArr.forEach(item => {
         item.disabled = false;
     });
-
     let gameText = document.getElementById("player-announce");
-    gameText.textContent = "It is Player 1's turn";
+    gameText.textContent = `It is ${playGame().activePlayer[0]}'s turn`;
     playGame().changeBoard();
     playGame().checkWinner();
+    this.hidden = true;
 });
+
+document.getElementById("reset-button").addEventListener("click", function () {
+    function removeThis () {
+        document.getElementById("start-button").removeEventListener("click", function() {
+            let squares = document.querySelectorAll(".square");
+            let squaresArr = Array.from(squares);
+        
+            squaresArr.forEach(item => {
+                item.disabled = false;
+            });
+            let gameText = document.getElementById("player-announce");
+            gameText.textContent = `It is ${playGame().activePlayer[0]}'s turn`;
+            playGame().changeBoard();
+            playGame().checkWinner();
+            this.disabled = true;
+        })
+    }
+
+    removeThis();
+
+
+    let squares = document.querySelectorAll(".square");
+    let squaresArr = Array.from(squares);
+
+    squaresArr.forEach(item => {
+        item.textContent = " ";
+        item.classList.remove("player-1");
+        item.classList.remove("player-0");
+        if (item.disabled = true) {
+            item.disabled = false;
+        } else {
+
+        }
+    });
+
+    gameBoard.gameBoardArr = ["", "", "", "", "", "", "", "", ""];
+    
+
+    let gameText = document.getElementById("player-announce");
+    gameText.textContent = `It is ${playGame().activePlayer[0]}'s turn`;
+    playGame().remove;
+    playGame().checkWinner().remove;
+    playGame().changeBoard();
+    playGame().checkWinner();
+    this.disabled = true;
+    if (document.getElementById("player-announce").classList.contains("winner-1")) {
+        document.getElementById("player-announce").classList.remove("winner-1")
+    } else if (document.getElementById("player-announce").classList.contains("winner-2")) {
+        document.getElementById("player-announce").classList.remove("winner-2")
+    } else {
+
+    }
+
+})

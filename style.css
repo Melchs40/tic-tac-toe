@@ -1,44 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 body {
+    font-family: 'Permanent Marker', cursive;
     background-color: #011627;
-    color: #fdfffc;
+    color: rgb(18, 17, 17);
+    background-color: white;
 }
+
+#title {
+    display: flex;
+    justify-content: center;
+}
+
+#player-announce {
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+}
+
+#page-container {
+    display: grid;
+    grid-template-columns: 500px, 490px, 1fr;
+}
+
+#player-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 50px;
+    width: 250px;
+    grid-column-start: 0;
+    grid-column-end: 1;
+    grid-row-start: 0;
+    grid-row-end: 1;
+}
+
+#player1-name-container, #player1-symbol-container, #player2-name-container, #player2-symbol-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 24px;
+}
+
+#board-container {
+    display: flex;
+    justify-content: center;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 0;
+    grid-row-end: 1;
+}
+
+#player-controls {
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 0;
+    grid-row-end: 1;
+}
+
 #game-board {
     display: grid;
-    height: 600px;
-    width: 600px;
+    height: 450px;
+    width: 450px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    padding: 10px;
     gap: 10px;
     border-radius: 10px;
-    background-color: #fdfffc;
+    background-color: black;
 }
 
 .square {
-    border-radius: 10px;
-    background-color: #2ec4b6;
+    background-color: white;
+    border: none;
 }
 
+/* .square:hover {
+    background-color: rgb(216, 210, 210);
+} */
+
 .square:disabled {
-    border: 3px solid #ff9f1c;
+   border: none;
 }
 
 .player-0 {
+    font-family: 'Permanent Marker', cursive;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 128px;
-    color: #ff9f1c;
+    font-size: 64px;
+    color: blue;
 }
 
 .player-1 {
+    font-family: 'Permanent Marker', cursive;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 128px;
+    font-size: 64px;
     color: #e71d36;
 }
 
-.winner {
-    font-size: 32px;
+
+.winner-2, #player2-name, #player2-symbol {
+    color: #e71d36;
+}
+
+.winner-1, #player1-name, #player1-symbol {
+    color: blue;
+}
+
+.player-buttons, .player-forms {
+    font-family: 'Permanent Marker', cursive;
+}
+
+.player-buttons {
+    border: none;
+    background-color: white;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+#player-enter-form {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    gap: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+#player-name, #player-symbol {
+    border: none;
+    font-size: 24px;
+}
+
+input:empty + button {
+    pointer-events: none;
+}
+
+#submit-button {
+    width: fit-content;
+}
+
+#submit-button:disabled, #reset-button:disabled, .player-forms:disabled {
+    visibility: hidden;
+}
+
+#footer {
+    padding-top: 40px;
+    margin-top: auto;
+    display: flex;
+    align-items: end;
+    justify-content: center;
 }
